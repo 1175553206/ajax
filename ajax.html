@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+
+function ajax(obj) {
+    let a=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject('Microsoft.XMLHTTP');
+    //        异步
+        obj.asynch=obj.asynch||ture;
+        //设置数据默认值
+        obj.data = obj.data || null;
+    if(obj.type=='get'){
+        a.open(obj.type,obj.url+'?'+obj.date,obj.asynch);
+        a.send();
+    }else{
+        a.open(obj.type,obj.url,obj.asynch);
+        a.send(obj.date);
+    }
+    obj.success(a.responseText);
+
+}
+let sub=document.querySelector('input[type=submit]');
+sub.onclick=function (e) {
+    e.preventDefault();
+    ajax({
+        url:'index.php',
+        type:'get',
+        data:'name=user&name=pass',
+        asynch:true,
+        datatype:'text',
+        success:function (mes) {
+            console.log(mes);
+        }
+    })
+}
+
+
+
+</script>
